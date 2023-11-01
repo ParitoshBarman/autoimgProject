@@ -15,5 +15,3 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'autoimgProject.settings')
 
 application = get_wsgi_application()
 
-# Add for Vercel deployment
-app = application
