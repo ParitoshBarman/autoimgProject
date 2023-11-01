@@ -1,0 +1,201 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AutoIMG</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+
+<body id="body">
+    <header>
+        <nav>
+            <h1>AutoIMG by Paritosh Barman</h1>
+            <p>Passport size photo just a single click and direct print</p>
+        </nav>
+    </header>
+    <div id="main">
+        <h1>Create your own professional passport photo
+            online With Single-Click in One Second and Direct print</h1>
+        <form action="/" method="post">
+            {% csrf_token %}
+            <label for="fileId" class="custom-file-upload">
+                Choose File
+            </label>
+            <input type="file" id="fileId" onchange="imageUploaded()" name="picture" accept="image/*" capture="user"
+                required class="actual-btn">
+            <br>
+            <div id="browseImg"><img id="bimg" src="{{facedetected}}" alt=""></div>
+            <canvas id="resized" hidden></canvas>
+
+            <br><br><br>
+            <label for="color">Choose Background Color</label>
+            <input type="color" name="color" id="color" value="#0091ff">
+            <br><br><br>
+            <fieldset>
+                <legend>Choose Background Remove Quality:</legend>
+
+                <div>
+                    <input type="radio" id="noneed" name="removequality" value="noneed" checked />
+                    <label for="noneed">No need</label>
+                </div>
+
+                <div>
+                    <input type="radio" id="normal" name="removequality" value="normal" />
+                    <label for="normal">Normal</label>
+                </div>
+
+                <div>
+                    <input type="radio" id="advence" name="removequality" value="advence" />
+                    <label for="advence">Advence</label>
+                </div>
+                <p>Advence will take a little time</p>
+
+            </fieldset>
+
+            <input type="hidden" name="pictureBase" id="base64value">
+            <br><br>
+            <button type="submit" class="getImageButton">Get Image</button>
+        </form>
+
+        {% if img %}
+        <div id="outputSection">
+            <div>
+                <img src="{{img}}" alt="Original Image">
+                <a href="{{img}}" download class="getImageButton">Download</a>
+            </div>
+            <div>
+                <img src="{{facedetected}}" alt="Face detected Image">
+                <a href="{{facedetected}}" download class="getImageButton">Download</a>
+            </div>
+            <div>
+                <img src="{{cropeImage}}" alt="Output Image">
+                <a href="{{cropeImage}}" download class="getImageButton">Download</a>
+            </div>
+        </div>
+
+        <div id="printSection">
+            <div class="number-input">
+                <button class="decrement Bbutton" id="#decrementT" onclick="decrementFunc()">-</button>
+                <input type="number" onchange="printNoCh()" onkeyup="printNoCh()" value="4" min="1" max="100" class="Iinput" id="printNum">
+                <button class="increment Bbutton" id="#incrementT" onclick="incrementFunc()">+</button>
+              </div>
+
+              <div id="a4page">
+                <img src="{{cropeImage}}" alt="Output Image">
+                <img src="{{cropeImage}}" alt="Output Image">
+                <img src="{{cropeImage}}" alt="Output Image">
+                <img src="{{cropeImage}}" alt="Output Image">
+                
+
+              </div>
+              <div style="text-align: center; margin: 35px 0;">
+                <button class="getImageButton" onclick="printFunc()">Print</button>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+    
+    <footer class="flex-all-center" style="font-family: sans-serif;margin-top: 100px;">
+        <table width="100%" style="background-color: #565656;color: #ffffff;margin-bottom: 0px;border-radius: 0px;">
+            <tr>
+                <td style="text-align: center;padding: 45px 20px;">
+                    <a href="#"><img src="{% static 'img/myImg.png' %}" alt="" width="110"></a>
+                    <p style="padding:10px;">Paritosh Barman</p>
+                    <p style="padding:10px;">Barakaimari, Coochbehar, West Bengal, India</p>
+                    <p style="padding:10px;">barmanpari163@gmail.com</p>
+
+                    <a href="https://www.linkedin.com/in/paritosh-barman-003257229/" target="_blank">
+                        <img src="{% static 'img/white-linkedin.png' %}" alt="" width="32">
+                    </a>
+                    <a href="https://www.youtube.com/@ultimateexperiment9586" target="_blank">
+                        <img src="{% static 'img/white-youtube.png' %}" alt="" width="32">
+                    </a>
+                    <a href="#" style="text-decoration: none;color: #ffffff;"><p style="padding:10px;">THANK YOU</p></a>
+                    <p>Copyright &copy; by AutoIMG</p>
+                </td>
+            </tr>
+            
+            
+                
+            
+            
+        </table>
+    </footer>
+    <div style="height: 10px;background-color: #2874f0;"></div>
+   
+    <script>
+        let a4pageEle = document.querySelector("#a4page");
+        let printNum =  document.querySelector("#printNum");
+        let passImage = document.querySelector("#outputSection>div:last-child>img");
+        let base64String = "";
+
+        function imageUploaded() {
+            let file = document.querySelector(
+                'input[type=file]')['files'][0];
+
+                var img = new Image(),
+        canvas = document.getElementById("resized"),
+        ctx = canvas.getContext("2d");
+
+    // (B2) RESIZE ON IMAGE LOAD
+    img.onload = () => {
+
+        let width = Math.floor(800),
+            height = Math.floor((img.naturalHeight * 800)/img.naturalWidth);
+        canvas.width = width;
+        canvas.height = height;
+        ctx.drawImage(img, 0, 0, width, height);
+        document.getElementById("base64value").value = canvas.toDataURL("image/png");
+    }
+    console.log(URL.createObjectURL(file))
+    img.src = URL.createObjectURL(file);
+
+            const fileInput = document.getElementById('fileId');
+
+            if (fileInput.files.length > 0) {
+                const file = fileInput.files[0];
+                const src = URL.createObjectURL(file);
+                document.getElementById("bimg").src = src;
+                document.querySelector("#browseImg").style.border = "1px solid gray";
+            }
+        }
+
+        function decrementFunc (){
+            console.log("Dec")
+            if(Number(printNum.value)>1){
+                printNum.value = Number(printNum.value)-1;
+                printNoCh()
+            }
+        };
+        function incrementFunc (){
+            if(Number(printNum.value)<100){
+                printNum.value = Number(printNum.value)+1;
+                printNoCh()
+            }
+        };
+        function printNoCh(){
+            let newImageListI = "";
+            let singleImage = `<img src="${passImage.src}" style="width: 11%;padding: 8px;">`
+            for(let i=0; i<Number(printNum.value); i++){
+                newImageListI += singleImage;
+            }
+            a4pageEle.innerHTML = newImageListI;
+        };
+
+        function printFunc(){
+            let body = document.getElementById("body").innerHTML;
+            let a4page = document.getElementById("a4page").innerHTML;
+            document.getElementById("body").innerHTML = a4page;
+            window.print();
+            document.getElementById("body").innerHTML = body;
+
+        }
+        
+
+    </script>
+</body>
+
+</html>
