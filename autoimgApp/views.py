@@ -72,10 +72,10 @@ def index(request):
         redC, greenC, blueC = hex_to_rgb(request.POST.get('color'))
         # if(request.POST.get('bgchek')=="on"):
         if(request.POST.get('removequality')=="normal"):
-            print("Working..................")
+            # print("Working..................")
             cropedImg = seg.removeBG(cropedImg, (blueC,greenC,redC), cutThreshold=0.6)
         elif(request.POST.get('removequality')=="advence"):
-            print("Working..................")
+            # print("Working..................")
             fileLocationCode = int(rdnnnn.choice(randdomList))
             op = remove(cropedImg)
             cv2.imwrite(f"xxxxxxxx{fileLocationCode}.png", op)
