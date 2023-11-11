@@ -29,68 +29,70 @@ def getBase64Image(img):
 # Create views here.
 def index(request):
     if request.method == 'POST':
-        # img = data_uri_to_cv2_img(f"data:image/png;base64,{request.POST.get('pictureBase')}")
-        img = data_uri_to_cv2_img(f"{request.POST.get('pictureBase')}")
-        h, w, c = img.shape
-        needSize = 800
-        if(h>needSize or w>needSize):
-            img = cv2.resize(img, (int(needSize), int((h*needSize)/w)))
+        try:
+            # img = data_uri_to_cv2_img(f"data:image/png;base64,{request.POST.get('pictureBase')}")
+            img = data_uri_to_cv2_img(f"{request.POST.get('pictureBase')}")
+            h, w, c = img.shape
+            needSize = 500
+            if(h>needSize or w>needSize):
+                img = cv2.resize(img, (int(needSize), int((h*needSize)/w)))
 
-        imgCopy = img.copy()
-        gray = cv2.cvtColor(imgCopy, cv2.COLOR_BGR2GRAY)
-        faces = caceDD.detectMultiScale(gray, 1.1, 4)
-        prviosH = 0
-        prviosW = 0
-        prviosx = 0
-        prviosy = 0
-        for (x, y, H, W) in faces:
-            cv2.rectangle(imgCopy, (x, y), (x+W, y+H), (0, 0, 255), 3)
-            if(prviosH<H and prviosW<W):
-                prviosH = H
-                prviosW = W
-                prviosx = x
-                prviosy = y
-            # break
-        H = prviosH
-        W = prviosW
-        x = prviosx
-        y = prviosy
-        start1 = y-int(H*(1/2))
-        if start1<0:
-            start1 = 0
-        start2 = x-int(W*(1/3))
-        if start2<0:
-            start2 = 0
-        end1 = y+H+int(H*(1/2))
-        if end1>h:
-            end1 = h
-        end2 = x+W+int(W*(1/3))
-        if end2>w:
-            end2 = w
-        cropedImg = img[start1:end1, start2:end2]
+            imgCopy = img.copy()
+            gray = cv2.cvtColor(imgCopy, cv2.COLOR_BGR2GRAY)
+            faces = caceDD.detectMultiScale(gray, 1.1, 4)
+            prviosH = 0
+            prviosW = 0
+            prviosx = 0
+            prviosy = 0
+            for (x, y, H, W) in faces:
+                cv2.rectangle(imgCopy, (x, y), (x+W, y+H), (0, 0, 255), 3)
+                if(prviosH<H and prviosW<W):
+                    prviosH = H
+                    prviosW = W
+                    prviosx = x
+                    prviosy = y
+                # break
+            H = prviosH
+            W = prviosW
+            x = prviosx
+            y = prviosy
+            start1 = y-int(H*(1/2))
+            if start1<0:
+                start1 = 0
+            start2 = x-int(W*(1/3))
+            if start2<0:
+                start2 = 0
+            end1 = y+H+int(H*(1/2))
+            if end1>h:
+                end1 = h
+            end2 = x+W+int(W*(1/3))
+            if end2>w:
+                end2 = w
+            cropedImg = img[start1:end1, start2:end2]
 
-        redC, greenC, blueC = hex_to_rgb(request.POST.get('color'))
-        # if(request.POST.get('bgchek')=="on"):
-        if(request.POST.get('removequality')=="normal"):
-            # print("Working..................")
-            cropedImg = seg.removeBG(cropedImg, (blueC,greenC,redC), cutThreshold=0.6)
-        elif(request.POST.get('removequality')=="advence"):
-            # print("Working..................")
-            fileLocationCode = int(rdnnnn.choice(randdomList))
-            op = remove(cropedImg)
-            cv2.imwrite(f"xxxxxxxx{fileLocationCode}.png", op)
-            cropedImg = cv2.imread(f"xxxxxxxx{fileLocationCode}.png")
-            cropedImg = seg.removeBG(cropedImg, (blueC,greenC,redC), cutThreshold=0.6)
+            redC, greenC, blueC = hex_to_rgb(request.POST.get('color'))
+            # if(request.POST.get('bgchek')=="on"):
+            if(request.POST.get('removequality')=="normal" or request.POST.get('removequality')=="advence"):
+                # print("Working..................")
+                cropedImg = seg.removeBG(cropedImg, (blueC,greenC,redC), cutThreshold=0.6)
+            elif(request.POST.get('removequality')=="advence"):
+                # print("Working..................")
+                fileLocationCode = int(rdnnnn.choice(randdomList))
+                op = remove(cropedImg)
+                cv2.imwrite(f"xxxxxxxx{fileLocationCode}.png", op)
+                cropedImg = cv2.imread(f"xxxxxxxx{fileLocationCode}.png")
+                cropedImg = seg.removeBG(cropedImg, (blueC,greenC,redC), cutThreshold=0.6)
 
 
 
-        sendData = {
-            "img": getBase64Image(img),
-            "facedetected": getBase64Image(imgCopy),
-            "cropeImage": getBase64Image(cropedImg)
-        }
+            sendData = {
+                "img": getBase64Image(img),
+                "facedetected": getBase64Image(imgCopy),
+                "cropeImage": getBase64Image(cropedImg)
+            }
 
-        return render(request, 'index.html', sendData)
-
+            return render(request, 'index.html', sendData)
+        except:
+            return render(request, 'index.html', {"errorMsg":"Please give a valid image!"})
     return render(request, 'index.html')
          
