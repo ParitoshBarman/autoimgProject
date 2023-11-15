@@ -8,3 +8,4 @@ venv/
 venv2/
 AutoIMG.pem
 VPS_guid_aws_Pari.txt
+db.sqlite3
