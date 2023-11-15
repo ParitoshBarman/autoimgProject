@@ -1,0 +1,100 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="{% static 'img/myImg.png' %}" type="image/png">
+
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <link rel="stylesheet" href="{% static 'responsive.css' %}">
+    <link rel="stylesheet" href="{% static 'responsive2.css' %}">
+
+{% block head %}
+
+    {% endblock head%}
+
+</head>
+
+    
+
+
+<body>
+    <div class="pogress" id="pogressID"></div>
+
+    <header>
+        <nav>
+            <h1>AutoIMG by Paritosh Barman</h1>
+            <p>Passport size photo just a single click and direct print</p>
+        </nav>
+        <div class="container" onclick="myFunction(this)">
+            <div class="bar1"></div>
+            <div class="bar2"></div>
+            <div class="bar3"></div>
+          </div>
+          <div id="navoption">
+            <ul>
+                <li>
+                    <a href="/">Home</a>
+                </li>
+                <li>
+                    <a href="/about">About</a>
+                </li>
+                <li>
+                    <a href="/contact">Contact</a>
+                </li>
+                <li>
+                    <a href="/privacy_policy">Privacy Policy</a>
+                </li>
+            </ul>
+          </div>
+    </header>
+
+
+
+
+
+{% block body %}
+
+{% endblock body %}
+
+ 
+
+
+<footer class="flex-all-center" style="font-family: sans-serif;margin-top: 100px;">
+    <table width="100%" style="background-color: #565656;color: #ffffff;margin-bottom: 0px;border-radius: 0px;">
+        <tr>
+            <td style="text-align: center;padding: 45px 20px;">
+                <a href="#"><img src="{% static 'img/myImg.png' %}" alt="" width="110"></a>
+                <p style="padding:10px;">Paritosh Barman (Aspr. software developer and software engineer at Prepleaf by Masai)</p>
+                <p style="padding:10px;">Barakaimari, Coochbehar, West Bengal, India</p>
+                <p style="padding:10px;">paritoshpuitta@gmail.com</p>
+
+                <a href="https://www.linkedin.com/in/paritosh-barman-003257229/" target="_blank">
+                    <img src="{% static 'img/white-linkedin.png' %}" alt="" width="32">
+                </a>
+                <a href="https://www.youtube.com/@ultimateexperiment9586" target="_blank">
+                    <img src="{% static 'img/white-youtube.png' %}" alt="" width="32">
+                </a>
+                <a href="#" style="text-decoration: none;color: #ffffff;"><p style="padding:10px;">THANK YOU</p></a>
+                <p>Copyright &copy; 2023 by AutoIMG</p>
+            </td>
+        </tr>
+        
+        
+            
+        
+        
+    </table>
+</footer>
+<div style="height: 10px;background-color: #2874f0;"></div>
+   
+
+
+
+    <script src="{% static 'JS.js' %}"></script>
+
+</body>
+
+</html>

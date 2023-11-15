@@ -5,10 +5,41 @@ import base64
 from rembg import remove
 import random as rdnnnn
 from cvzone.SelfiSegmentationModule import SelfiSegmentation
+import autoimgApp.password as password
+from email.message import EmailMessage
+import ssl
+import smtplib
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
+from datetime import datetime, timedelta
+from autoimgApp.models import ContactMessage, WorkingDB
+import os
+import threading
+import time
+
 seg = SelfiSegmentation()
 randdomList = [1,2,3,4,5,6]
 
 caceDD = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
+
+deletExtraImagesRUNNINGstatus = True
+
+def deletExtraImages():
+    global deletExtraImagesRUNNINGstatus
+    time.sleep(15)
+    if deletExtraImagesRUNNINGstatus:
+        deletExtraImagesRUNNINGstatus = False
+        mainDir = "./media/FileDBFolder"
+        allfiles = os.listdir(mainDir)
+        for file in allfiles:
+            created = os.path.getctime(f"{mainDir}/{file}")
+            if((datetime.fromtimestamp(created)+timedelta(minutes=5)) < datetime.now()):
+                os.remove(f"{mainDir}/{file}")
+        WorkingData = WorkingDB.objects.all()
+        WorkingData[len(WorkingData)-2].delete()
+        deletExtraImagesRUNNINGstatus = True
+
+
 
 def hex_to_rgb(value):
     value = value.lstrip('#')
@@ -30,10 +61,14 @@ def getBase64Image(img):
 def index(request):
     if request.method == 'POST':
         try:
-            # img = data_uri_to_cv2_img(f"data:image/png;base64,{request.POST.get('pictureBase')}")
-            img = data_uri_to_cv2_img(f"{request.POST.get('pictureBase')}")
+            file = request.FILES['picture']
+            WorkingData = WorkingDB(selectFile=file)
+            WorkingData.save()
+            main_URL = WorkingData.selectFile.url
+            img = cv2.imread(f"./media{main_URL}")
             h, w, c = img.shape
-            needSize = 500
+            needSize = int(request.POST.get('q-select'))
+
             if(h>needSize or w>needSize):
                 img = cv2.resize(img, (int(needSize), int((h*needSize)/w)))
 
@@ -75,6 +110,7 @@ def index(request):
             if(request.POST.get('removequality')=="normal" or request.POST.get('removequality')=="advence"):
                 # print("Working..................")
                 cropedImg = seg.removeBG(cropedImg, (blueC,greenC,redC), cutThreshold=0.6)
+                cv2.imwrite(f"./media{main_URL.replace('.', 'cropped')}.jpg", cropedImg)
             elif(request.POST.get('removequality')=="advence"):
                 # print("Working..................")
                 fileLocationCode = int(rdnnnn.choice(randdomList))
@@ -82,17 +118,116 @@ def index(request):
                 cv2.imwrite(f"xxxxxxxx{fileLocationCode}.png", op)
                 cropedImg = cv2.imread(f"xxxxxxxx{fileLocationCode}.png")
                 cropedImg = seg.removeBG(cropedImg, (blueC,greenC,redC), cutThreshold=0.6)
+                cv2.imwrite(f"./media{main_URL.replace('.', 'cropped')}.png", cropedImg)
+            else:
+                cv2.imwrite(f"./media{main_URL.replace('.', 'cropped')}.jpg", cropedImg)
 
 
-
+            cv2.imwrite(f"./media{main_URL.replace('.', 'facedetection')}.jpg", imgCopy)
             sendData = {
-                "img": getBase64Image(img),
-                "facedetected": getBase64Image(imgCopy),
-                "cropeImage": getBase64Image(cropedImg)
+                "img": main_URL,
+                "facedetected": f"{main_URL.replace('.', 'facedetection')}.jpg",
+                "cropeImage": f"{main_URL.replace('.', 'cropped')}.jpg",
+                "needSize": needSize
             }
+            t1 = threading.Thread(target=deletExtraImages)
+            t1.start()
 
             return render(request, 'index.html', sendData)
         except:
             return render(request, 'index.html', {"errorMsg":"Please give a valid image!"})
     return render(request, 'index.html')
          
+
+
+
+
+
+
+def about(request):
+    return render(request, 'about.html')
+
+def privacy_policy(request):
+    return render(request, 'privacy_policy.html')
+
+
+
+
+
+def contact(request):
+    if request.method == 'POST':
+        fullname = request.POST.get('fullname')
+        email3 = request.POST.get('email')
+        phone = request.POST.get('phone')
+        subject = request.POST.get('subject')
+        message = request.POST.get('message')
+        dateee = datetime.today()
+        cmsgdb = ContactMessage(fullname=fullname, email=email3, phone=phone, subject=subject, message=message, dateee=dateee)
+        cmsgdb.save()
+        senderEmail = password.senderEmailId()
+        ePassword = password.emailPassword()
+        receiverEmail = password.recverEmailId()
+        # receiverEmail = "systemready2014@gmail.com"
+        messagee = MIMEMultipart("alternative")
+        messagee["Subject"] = f"GooBusinesses Contact Message form {fullname}"
+        messagee["From"] = senderEmail
+        messagee["To"] = receiverEmail
+
+        htmlHead = """<html>
+        <head>
+            <style>
+                *{
+                    margin: 0;
+                    padding: 0;
+                }
+                .header{
+                    background-color: #417690;;
+                    width: 100vw;
+                    height: 54px;
+                }
+                h1{
+                    color: green;
+                    margin: 10px;
+                }
+                .data{
+                    color: blueviolet;
+                }
+                
+                .subjectcl{
+                    text-align:center;
+                    margin: 5px 0px;
+                    color:green;
+                }
+                .msg{
+                    margin:3px 0px;
+                }
+            </style>
+        </head>"""
+        htmlBody = f"""
+                    <body>
+                <div class="header"></div>
+                <h1>Hi Welcome to Goo Businesses</h1>
+                    <h3><span>Date: </span><span class="data">{dateee}</span></h3>
+                    <h3><span>Name: </span><span class="data">{fullname}</span></h3>
+                    <h3><span>Phone: </span><span class="data">{phone}</span></h3>
+                    <h3><span>Email: </span><span class="data">{email3}</span></h3>
+                    <h2 class="data subjectcl">{subject}</h2>
+                    <pre class="msg">{message}</pre>
+            </body>
+        </html>
+                """
+        html = htmlHead + htmlBody
+        part2 = MIMEText(html, "html")
+        messagee.attach(part2)
+        try:
+            context = ssl.create_default_context()
+            with smtplib.SMTP_SSL("smtp.gmail.com", 465, context=context) as server:
+                server.login(senderEmail, ePassword)
+                server.sendmail(senderEmail, receiverEmail, messagee.as_string())
+                # emailStatus = 'Email also successfully received.....'
+                # print('Success......')
+        except:
+            pass
+        return render(request, 'contact.html', {'backmsg': 'Message sent successfully'})
+        
+    return render(request, 'contact.html')

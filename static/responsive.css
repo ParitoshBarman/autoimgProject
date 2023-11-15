@@ -1,0 +1,21 @@
+
+
+
+@media screen and (max-width:700px) {
+    #browseImg{
+        width: 95%;
+    }
+    #outputSection>div{
+        width: 90%;
+    }
+    #outputSection>div>img{
+        width: 100%;
+    }
+
+    #outputSection>div:last-child{
+        width: 50%;
+        margin: auto;
+    }
+
+
+}

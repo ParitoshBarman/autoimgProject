@@ -1,0 +1,116 @@
+*{margin: 0;padding: 0;}
+main h1{
+    text-align: center;
+    font-family: sans-serif;
+    margin: 25px 0px 35px 0px;
+}
+
+.contactItems{
+    width: 75vw;
+    height: auto;
+    /* background-color: aqua; */
+    margin: 0px auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.boxBoxes{
+    /* background-color: rgba(255, 0, 0, 0.397); */
+    width: 216px;
+    height: inherit;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 10px;
+    }
+
+.icon{
+    margin: 0px 0px 10px 0px;
+}
+.icon:hover{transform: scale(1.2);}
+.boxText{
+    text-align: center;
+    margin: 3px 0px;
+    font-family: sans-serif;
+    font-size: small;
+}
+.bold{
+    font-weight: bold;
+}
+
+.contactboxes{
+    /* background-color: red; */
+    width: 75vw;
+    height: auto;
+    margin: 50px auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.box1{
+    /* background-color: blue; */
+    width: 530px;
+    height: auto;
+    margin-right: 10px;
+    
+    
+}
+.box2{
+    width: 400px;
+    height: 500px;
+    
+}
+.entrys{
+    width: 90%;
+    margin: 14px 0px;
+}
+.formBox{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    font-family: sans-serif;
+}
+.entryBox{
+    width: 100%;
+    height: 30px;
+    border-top: none;
+    border-right: none;
+    border-left: none;
+    border-bottom: 1px solid gray;
+    padding: 3px;
+    
+}
+
+.descCL{
+    height: 90px;
+    padding: 3px;
+    margin-top: 5px;
+}
+.smt{
+    align-self: flex-end;
+    margin-right: 70px;
+    width: 145px;
+    height: 30px;
+    border-radius: 4px;
+    font-size: 17px;
+    background-color: #2196f3;
+    font-weight: 600;
+    color: white;
+    margin-bottom: 30px;
+    border: 1px solid gray;
+    cursor: pointer;
+}
+.smt:hover{
+    background-color: #0a5fa5;
+}
+
+.box2 img{
+    width: 100%;
+    height: 100%;
+}

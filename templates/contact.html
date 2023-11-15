@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+<title>Get in Touch with AutoIMG: Contact Us for Support and Inquiries</title>
+<meta name="description" content="Welcome to the Contact Us page of AutoIMG. We appreciate your interest in our AI-powered image editing application and are here to assist you with any inquiries, support needs, or feedback you may have.">
+<meta name="robots" content="index follow">
+<link rel="stylesheet" href="{% static 'forcontactpage.css' %}">
+
+{% endblock head%}
+
+{% block body %}
+
+
+<main>
+    {% if backmsg %}
+    <div style="width: 100%; height:30px; background-color: rgba(110, 255, 110, 0.603); text-align: center; font-size: 25px; font-family: sans-serif;">
+        {{backmsg}}...
+    </div>
+        
+        {% endif %}
+    <h1>Contact Us</h1>
+
+    <div class="contactItems">
+        <div class="boxBoxes">
+            <a href=""><img class="icon" src="{% static 'img/google-maps.png' %}" width="50px" alt=""></a>
+
+            <div class="boxText"><span class="bold">Address: </span><span class="normal">Barakaimari, Coochbehar, West Bengal, India</span></div>
+            
+            
+        </div>
+        <div class="boxBoxes">
+            <a href="tel:+919091467852"><img class="icon" src="{% static 'img/telephone.png' %}" width="50px" alt=""></a>
+
+            <div class="boxText"><span class="bold">Phone1: </span><span class="normal">+91 9091467852</span></div>
+            <div class="boxText"><span class="bold">Phone2: </span><span class="normal">+91 7550825163</span></div>
+        </div>
+        <div class="boxBoxes">
+            <a href="mailto:barmanpari163@gmail.com"><img class="icon" src="{% static 'img/Email3.png' %}" width="50px"
+                    alt=""></a>
+
+            <div class="boxText"><span class="bold">Emails: </span>
+                <span class="normal"> barmanpari163@gmail.com</span></div>
+            <div class="boxText"><span class="bold"></span><span class="normal">paritoshpuitta@gmail.com</span>
+            </div>
+            
+        </div>
+        <div class="boxBoxes">
+            <a href="https://wa.me/919091467852" target="_blank"><img class="icon" src="{% static 'img/whatsapp.png' %}" width="50px" alt=""></a>
+            <div class="boxText"><span class="bold">WhatsApp: </span><span class="normal">+91 9091467852</span></div>
+        </div>
+
+    </div>
+
+
+
+    <div class="container55555">
+        <div class="contactboxes">
+            <div class="box1">
+                <form class="formBox" action="/contact" method="post">
+                    {% csrf_token %}
+                    <div class="entrys">
+                        <label for="nameId">Full Name</label><br>
+                        <input type="text" id="nameId" placeholder="Name" class="entryBox" name="fullname" required>
+                    </div>
+                    <div class="entrys">
+                        <label for="emailId">Email</label><br>
+                        <input type="email" id="emailId" placeholder="Email" class="entryBox" name="email" required>
+                    </div>
+                    <div class="entrys">
+                        <label for="phoneId">Phone Number</label><br>
+                        <input type="tel" id="phoneId" placeholder="Phone" class="entryBox" name="phone" required>
+                    </div>
+                    <div class="entrys">
+                        <label for="subjectId">Subject</label><br>
+                        <input type="text" id="subjectId" placeholder="Subject" class="entryBox" name="subject">
+                    </div>
+                    <div class="entrys">
+                        <label for="desc">Message</label><br>
+                        <textarea id="desc" cols="30" rows="10" placeholder="Type your message..." class="entryBox descCL" name="message" required></textarea>
+
+                    </div>
+                    <button type="submit" class="smt">Send Message</button>
+                </form>
+            </div>
+
+
+
+            <div class="box2">
+                <img src="{% static 'img/contactImage.jpg' %}" alt="">
+            </div>
+
+
+
+        </div>
+
+
+    </div>
+
+
+</main>
+
+
+{% endblock body %}

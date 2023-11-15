@@ -1,210 +1,88 @@
+{% extends 'base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
+{% block head %}
+<title>AutoIMG: Your Free Passport to Effortless AI Photo Editing and Background Removal HD Quality</title>
+<meta name="description" content="Revolutionize Your Photos with Our AI-Powered Background Removal and Face-Cropping Tool. Discover the ultimate in AI-driven photo editing on our website! Instantly crop your images to passport size with pinpoint accuracy, tailored to your facial dimensions. Our advanced AI technology not only streamlines the process but also offers background removal at your fingertips. Elevate your photos with our intelligent platform, ensuring optimal results for all your editing needs. Unleash the power of AI for a seamless and efficient photo transformation experience. Try our website now for hassle-free, precision photo editing!">
+<meta name="keywords" content="AI image editing, Background removal tool, Face-cropping AI, Automated photo editing, Image enhancement software, AI-based cropping, Time-efficient photo editing, Instant photo editing">
+<meta name="robots" content="index follow">
+<style>
+     .newbody {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AutoIMG</title>
-    <link rel="stylesheet" href="{% static 'style.css' %}">
-<style>* {
-    margin: 0;
-    padding: 0;
-    font-family: sans-serif;
-}
-img{
-    border-radius: 5px;
-}
+        .newh1 {
+            color: #333;
+        }
 
-header {
-    background-color: #6e00ff;
-    min-height: 70px;
-    color: white;
-    text-align: center;
-}
+        .newP {
+            color: #555;
+            max-width: 600px;
+            text-align: center;
+            margin-bottom: 40px;
+        }
 
-nav>h1 {
-    padding-top: 17px;
-}
+        .cta-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
 
-nav>p {
-    padding: 20px;
-}
-
-#main {
-    max-width: 1350px;
-    width: 90%;
-    margin: auto;
-}
-
-#main>h1 {
-    text-align: center;
-    font-size: xx-large;
-    margin-top: 50px;
-    margin-bottom: 40px;
-}
-
-#main>form {
-    text-align: center;
-}
-
-fieldset>p {
-    font-size: small;
-    padding: 15px;
-}
-
-fieldset>div {
-    padding-top: 15px;
-}
-
-.custom-file-upload {
-    display: inline-block;
-    padding: 6px 12px;
-    cursor: pointer;
-    background-color: #6e00ff;
-    color: #fff;
-    border: 1px solid #2e6da4;
-    border-radius: 4px;
-}
-
-.actual-btn {
-    display: none;
-}
-
-#browseImg{
-    width: 70%;
-    padding: 10px;
-    border-radius: 5px;
-    margin: auto;
-    margin-top: 19px;
-}
-#bimg {
-    width: 90%;
-    margin: auto;
-}
-
-#color {
-    border: 2px solid #ccc;
-    border-radius: 5px;
-    background-color: #f1f1f1;
-}
-
-.getImageButton {
-    background-color: #6e00ff;
-    color: #fff;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-}
-
-.getImageButton:hover {
-    background-color: #235a9b;
-}
-
-
-#outputSection{
-    margin-top: 60px;
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
-}
-#outputSection>div{
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin-top: 30px;
-}
-#outputSection>div>img{
-    max-width: 100%;
-}
-#outputSection>div>a{
-    width: 100px;
-    text-align: center;
-    text-decoration: none;
-    margin-top: 15px;
-}
-
-
-.number-input {
-    margin: 15px;
-display: flex;
-align-items: center;
-font-family: Arial, sans-serif;
-}
-
-.Bbutton {
-width: 30px;
-height: 30px;
-background-color: #4CAF50;
-color: white;
-border: none;
-cursor: pointer;
-font-size: 20px;
-margin: 0 5px;
-border-radius: 50% 0 50% 0;
-}
-
-.Iinput {
-width: 40px;
-text-align: center;
-font-size: 16px;
-border: 1px solid #4CAF50;
-border-radius: 5px;
-}
-
-.Bbutton:hover {
-background-color: #45a049;
-}
-
-
-
-#a4page{
-width: 100%;
-border: 1px solid black;
-display: flex;
-flex-direction: row;
-flex-wrap: wrap;
-}
-#a4page>img{
-width: 11%;
-padding: 8px;
-}
-
-@media screen and (max-width:700px) {
-    #browseImg{
-        width: 95%;
-    }
-    #outputSection>div{
-        width: 90%;
-    }
-    #outputSection>div>img{
-        width: 100%;
-    }
-
-}
-
+        .cta-button:hover {
+            background-color: #0056b3;
+        }
+        .footerButtom {
+            text-align: center;
+            padding: 1em;
+            color: #636587;
+            margin-bottom: 30px;
+        }
+        .footerButtom>h2{
+          font-size: 22px;
+          font-weight: 500;
+        }
+        .select{
+          padding: 15px;
+          margin-top: 11px;
+          background-color: #55555517;
+          border-radius: 5px;
+        }
+        .select>select{
+          margin-top: 6px;
+          padding: 5px 9px;
+          border-radius: 5px;
+          border: 1px solid gray;
+        }
 </style>
 
-</head>
+{% endblock head%}
 
-<body id="body">
-    <header>
-        <nav>
-            <h1>AutoIMG by Paritosh Barman</h1>
-            <p>Passport size photo just a single click and direct print</p>
-        </nav>
-    </header>
+
+{% block body %}
+
+    
     {% if errorMsg %}
     <p style="text-align: center;color: red;background-color: rgba(255, 255, 0, 0.664);padding: 21px;font-size: 23px;">{{errorMsg}}</p>
     {% endif %}
     <div id="main">
-        <h1>Create your own professional passport photo
+        <h1>Create your own High Quality professional passport photo
             online With Single-Click in One Second and Direct print</h1>
-        <form action="/" method="post">
+            <div class="footerButtom">
+              <h2>AI image cropper and background remover.</h2>
+          </div>
+
+        <form action="/" method="post" enctype="multipart/form-data">
             {% csrf_token %}
             <label for="fileId" class="custom-file-upload">
                 Choose File
@@ -212,12 +90,25 @@ padding: 8px;
             <input type="file" id="fileId" onchange="imageUploaded()" name="picture" accept="image/*" required class="actual-btn">
             <br>
             <div id="browseImg"><img id="bimg" src="{{facedetected}}" alt=""></div>
-            <canvas id="resized" hidden></canvas>
 
             <br><br><br>
             <label for="color">Choose Background Color</label>
             <input type="color" name="color" id="color" value="#0091ff">
-            <br><br><br>
+            <br>
+            <div class="select">
+              <label for="q-select">Choose Quality:</label><br>
+              <select name="q-select" id="q-select">
+                <option value="250">250px</option>
+                <option value="500" selected>500px</option>
+                <option value="700">700px</option>
+                <option value="1000">1000px</option>
+                <option value="1000">1100px</option>
+                <option value="1000">1200px</option>
+                <option value="1500">1300px</option>
+              </select>
+          </div>
+            
+            <br><br>
             <fieldset>
                 <legend>Choose your Quality and Background</legend>
 
@@ -239,10 +130,10 @@ padding: 8px;
 
             </fieldset>
 
-            <input type="hidden" name="pictureBase" id="base64value">
             <br><br>
             <button type="submit" class="getImageButton">Get Image</button>
         </form>
+
 
         {% if img %}
         <div id="outputSection">
@@ -281,105 +172,200 @@ padding: 8px;
         </div>
         {% endif %}
     </div>
+    <div class="newbody" style="margin-top: 50px; margin-bottom: 70px;">
+        <h1 class="newh1">Your Photo Wizard</h1>
+        <p class="newP">Welcome to our cutting-edge website where we bring your photos to life! 📸✨</p>
+        <p class="newP">Say goodbye to background clutter! Our advanced technology seamlessly removes backgrounds, focusing on what matters most – your face. 🚀</p>
+        <p class="newP">But that's not all! We go beyond by detecting faces and expertly cropping your images into perfect passport-size photos. 📷✂️</p>
+        <p class="newP">Experience the simplicity of transforming your pictures effortlessly. Join us on a journey of photo perfection. Try it now! 👩‍💻👨‍💻</p>
+    </div>
+
+
+
+
+
+
+
+
+    <div class="A_Complete_Solution_Section">
+        <h2>AI IMAGE EDITOR</h2>
+        <h3>AutoIMG: AI Photo Perfection in One Click!</h3>
+        <p>Unlock Photo Brilliance with AutoIMG: Your One-Click All-in-One AI Solution for Effortless Editing, Cropping, Resizing,<br> and Background Removal. Elevate Your Images Instantly!</p>
+      </div>
     
-    <footer class="flex-all-center" style="font-family: sans-serif;margin-top: 100px;">
-        <table width="100%" style="background-color: #565656;color: #ffffff;margin-bottom: 0px;border-radius: 0px;">
-            <tr>
-                <td style="text-align: center;padding: 45px 20px;">
-                    <a href="#"><img src="https://i.ibb.co/BzSfdsQ/myImg.png" alt="" width="110"></a>
-                    <p style="padding:10px;">Paritosh Barman</p>
-                    <p style="padding:10px;">Barakaimari, Coochbehar, West Bengal, India</p>
-                    <p style="padding:10px;">barmanpari163@gmail.com</p>
+    
 
-                    <a href="https://www.linkedin.com/in/paritosh-barman-003257229/" target="_blank">
-                        <img src="https://i.ibb.co/yFNb7DT/white-linkedin.png" alt="" width="32">
-                    </a>
-                    <a href="https://www.youtube.com/@ultimateexperiment9586" target="_blank">
-                        <img src="https://i.ibb.co/m0wBWg4/white-youtube.png" alt="" width="32">
-                    </a>
-                    <a href="#" style="text-decoration: none;color: #ffffff;"><p style="padding:10px;">THANK YOU</p></a>
-                    <p>Copyright &copy; by AutoIMG</p>
-                </td>
-            </tr>
-            
-            
-                
-            
-            
-        </table>
-    </footer>
-    <div style="height: 10px;background-color: #2874f0;"></div>
+      <section class="CardSection">
+        <div class="someCards">
+          <div>
+            <div>
+              <div><img
+                  src="{% static 'img/IMG_20231112_124228.png' %}">
+              </div>
+              <h2>Choose a background</h2>
+              <p>Customize your photo backgrounds effortlessly with AutoIMG! Choose any color you like, click, and see your background transform. It's that simple to personalize your pictures with AutoIMG!<br>
+              </p>
+            </div>
+          </div>
+          <div>
+            <div>
+              <div><img src="{% static 'img/IMG_20231112_124452.png' %}"></div>
+              <h2>Output will see</h2>
+              <p>Click once, and witness the magic unfold in three distinctive outputs: your original image, a face-detected version, and a polished passport-size photo against a background of your choice. Simplify your editing journey with AutoIMG's seamless, triple-result transformation!</p>
+            </div>
+          </div>
+          <div>
+            <div>
+              <div><img src="{% static 'img/IMG_20231112_124339.png' %}">
+              </div>
+              <h2>Print and download</h2>
+              <p>After customization, download and print your images effortlessly. Enjoy the flexibility of printing as many copies as you desire. AutoIMG – where digital meets print for a seamless photo experience.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <div class="angleRedLine"></div>
+    
+    
+
+  <div class="A_Complete_Solution_Section Add_Time_Tracking">
+    <h2>AUTOIMG IN ACTION</h2>
+    <h3>A Real-Life Photo Transformation</h3>
+    <p>Dive into the power of AutoIMG with a real-life demonstration! Witness the seamless transformation of an ordinary photo into<br> a masterpiece. Experience the magic as we showcase the simplicity and precision of AutoIMG in action,<br> bringing your images to a new level of perfection. See the transformation unfold before your eyes!</p>
+  </div>
+
+  <div class="prantOfbigImg">
+    <div class="bigImg"><img
+        src="{% static 'img/Screenshot.png' %}" alt="">
+    </div>
+  </div>
+
+
+  <div class="A_Complete_Solution_Section INTEGRATIONS">
+    <h2>APPLICATIONS</h2>
+    <h3>Your Passport to Professional Portraits for Any Platform</h3>
+    <p>Unlock the versatility of your AutoIMG passport-size images! Tailor-made for any professional platform, these portraits seamlessly integrate across applications.<br> Whether it's LinkedIn, business cards, or official documents, trust AutoIMG to deliver a polished and professional image<br> that represents you effortlessly. Elevate your presence across various platforms with our precision-crafted passport-size portraits!</p>
+    
+  </div>
+
+  <section class="autoscroll">
+    <div>
+      <div>
+        <marquee behavior="alternate" direction="">
+          <div>
+            <div>
+              <img src="{% static 'img/gsheets.png' %}" alt="">
+            </div>
+            <div>
+              <img src="{% static 'img/asana.png' %}" alt="">
+            </div>
+            <div>
+              <img src="{% static 'img/slack.png' %}" alt="">
+            </div>
+            <div>
+              <img src="{% static 'img/teams.png' %}" alt="">
+            </div>
+            <div>
+              <img
+                src="{% static 'img/google-workspace.png' %}"
+                alt="">
+            </div>
+            <div>
+              <img src="{% static 'img/trello.png' %}" alt="">
+            </div>
+            <div>
+              <img src="{% static 'img/smartsheet.png' %}"
+                alt="">
+            </div>
+            <div>
+              <img src="{% static 'img/outlook.png' %}" alt="">
+            </div>
+            <div>
+              <img
+                src="{% static 'img/microsoft-planner.png' %}"
+                alt="">
+            </div>
+          </div>
+        </marquee>
+      </div>
+    </div>
+  </section>
+
+
+
+  <div class="A_Complete_Solution_Section TIME_TRACKING_APP">
+    <h2>SAVE YOUR TIME</h2>
+    <h3>Say Goodbye to All Manual Work</h3>
+  </div>
+
+
+
+  <section class="lastPeopleSection">
+    <div>
+      <div>
+        <div>
+          <div>
+            <img src="{% static 'img/website-icons-timesheets-white.svg' %}" alt="">
+          </div>
+          <div>
+            <h2>Effortless Background Removal</h2>
+            <p>Say goodbye to tedious manual background removal. Our website automates the process, saving you time and effort.</p>
+            <a href="#">No more background removal tension</a>
+          </div>
+        </div>
+        <div>
+          <div>
+            <img src="{% static 'img/website-icons-list-row-white.svg' %}" alt="">
+          </div>
+          <div>
+            <h2>Precision Face Cropping</h2>
+            <p>No more guesswork! Our intelligent system identifies facial features and automatically adjusts the image to passport size, ensuring a professional and compliant result.</p>
+            <a href="#">No more guesswork!</a>
+          </div>
+        </div>
+        <div>
+          <div>
+            <img src="{% static 'img/website-icons-target-white.svg' %}" alt="">
+          </div>
+          <div>
+            <h2>Time-Saving Solution</h2>
+            <p>In just a few clicks, transform any photo into a polished passport-size image. Our website streamlines the editing process, making it quick and convenient.</p>
+            <a href="#">Don't waste time on normal tasks</a>
+          </div>
+        </div>
+
+
+      </div>
+
+
+      <div>
+        <div><img src="{% static 'img/NiceBackgroundImg.png' %}" alt=""></div>
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <div class="A_Complete_Solution_Section INTEGRATIONS">
+    <h3 style="line-height: 43px;">Ready to Elevate Your Photos? <br>Take Action Now for Effortless Editing and Perfect Results!</h3>
+  </div>
+
+  <div class="lastSection">
+    <a class="btnStyle" href="#">Get started
+      <span>&rarr;</span></a><br>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+    
    
-    <script>
-        let a4pageEle = document.querySelector("#a4page");
-        let printNum =  document.querySelector("#printNum");
-        let passImage = document.querySelector("#outputSection>div:last-child>img");
-        let base64String = "";
-
-        function imageUploaded() {
-            let file = document.querySelector(
-                'input[type=file]')['files'][0];
-
-                var img = new Image(),
-        canvas = document.getElementById("resized"),
-        ctx = canvas.getContext("2d");
-
-    // (B2) RESIZE ON IMAGE LOAD
-    img.onload = () => {
-
-        let width = Math.floor(500),
-            height = Math.floor((img.naturalHeight * 500)/img.naturalWidth);
-        canvas.width = width;
-        canvas.height = height;
-        ctx.drawImage(img, 0, 0, width, height);
-        document.getElementById("base64value").value = canvas.toDataURL("image/png");
-    }
-    console.log(URL.createObjectURL(file))
-    img.src = URL.createObjectURL(file);
-
-            const fileInput = document.getElementById('fileId');
-
-            if (fileInput.files.length > 0) {
-                const file = fileInput.files[0];
-                const src = URL.createObjectURL(file);
-                document.getElementById("bimg").src = src;
-                document.querySelector("#browseImg").style.border = "1px solid gray";
-            }
-        }
-
-        function decrementFunc (){
-            console.log("Dec")
-            if(Number(printNum.value)>1){
-                printNum.value = Number(printNum.value)-1;
-                printNoCh()
-            }
-        };
-        function incrementFunc (){
-            if(Number(printNum.value)<100){
-                printNum.value = Number(printNum.value)+1;
-                printNoCh()
-            }
-        };
-        function printNoCh(){
-            let newImageListI = "";
-            let singleImage = `<img src="${passImage.src}" style="width: 11%;padding: 8px;">`
-            for(let i=0; i<Number(printNum.value); i++){
-                newImageListI += singleImage;
-            }
-            a4pageEle.innerHTML = newImageListI;
-        };
-
-        function printFunc(){
-            let body = document.getElementById("body").innerHTML;
-            let a4page = document.getElementById("a4page").innerHTML;
-            document.getElementById("body").innerHTML = a4page;
-            window.print();
-            document.getElementById("body").innerHTML = body;
-
-        }
-        
-
-    </script>
-</body>
-
-</html>
+    {% endblock body %}
