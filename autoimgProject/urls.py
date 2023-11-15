@@ -24,7 +24,7 @@ urlpatterns = [
     path('', include(('autoimgApp.urls', 'autoimgApp'), namespace='autoimgApp')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
-urlpatterns += staticfiles_urlpatterns()
+
 
 
 if settings.DEBUG:

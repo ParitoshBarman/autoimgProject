@@ -7,5 +7,5 @@ templates/test3.html
 venv/
 venv2/
 AutoIMG.pem
+AutoIMG2.pem
 VPS_guid_aws_Pari.txt
-db.sqlite3
