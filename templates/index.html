@@ -15,11 +15,14 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            height: 100vh;
+            padding: 23px 0;
         }
 
         .newh1 {
             color: #333;
+            text-align: center;
+            width: 100%;
+            padding: 5px 0;
         }
 
         .newP {
@@ -27,6 +30,8 @@
             max-width: 600px;
             text-align: center;
             margin-bottom: 40px;
+            width: 100%;
+            padding: 3px 2px;
         }
 
         .cta-button {
@@ -82,7 +87,7 @@
               <h2>AI image cropper and background remover.</h2>
           </div>
 
-        <form action="/" method="post" enctype="multipart/form-data">
+        <form action="/" method="post">
             {% csrf_token %}
             <label for="fileId" class="custom-file-upload">
                 Choose File
@@ -90,6 +95,7 @@
             <input type="file" id="fileId" onchange="imageUploaded()" name="picture" accept="image/*" required class="actual-btn">
             <br>
             <div id="browseImg"><img id="bimg" src="{{facedetected}}" alt=""></div>
+            <canvas id="resized" hidden></canvas>
 
             <br><br><br>
             <label for="color">Choose Background Color</label>
@@ -97,17 +103,15 @@
             <br>
             <div class="select">
               <label for="q-select">Choose Quality:</label><br>
-              <select name="q-select" id="q-select">
+              <select name="q-select" id="q-select" onchange="imageUploaded()">
                 <option value="250">250px</option>
                 <option value="500" selected>500px</option>
                 <option value="700">700px</option>
                 <option value="1000">1000px</option>
                 <option value="1000">1100px</option>
-                <option value="1000">1200px</option>
-                <option value="1500">1300px</option>
               </select>
           </div>
-            
+
             <br><br>
             <fieldset>
                 <legend>Choose your Quality and Background</legend>
@@ -130,6 +134,7 @@
 
             </fieldset>
 
+            <input type="hidden" name="pictureBase" id="base64value">
             <br><br>
             <button type="submit" class="getImageButton">Get Image</button>
         </form>

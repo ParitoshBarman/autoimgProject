@@ -104,6 +104,10 @@ USE_I18N = True
 
 USE_TZ = True
 
+# added menually
+DATA_UPLOAD_MAX_MEMORY_SIZE = 10485760 # 10 MB
+FILE_UPLOAD_MAX_MEMORY_SIZE = 10485760 # 10 MB
+
 STATIC_URL = '/static/'
 # STATIC_ROOT = BASE_DIR / "static"
 # STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'

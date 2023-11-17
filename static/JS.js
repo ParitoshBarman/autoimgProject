@@ -16,6 +16,24 @@ let base64String = "";
 function imageUploaded() {
     let file = document.querySelector(
         'input[type=file]')['files'][0];
+    let q_select = Number(document.getElementById("q-select").value);
+    
+        var img = new Image(),
+        canvas = document.getElementById("resized"),
+        ctx = canvas.getContext("2d");
+
+    // (B2) RESIZE ON IMAGE LOAD
+        img.onload = () => {
+
+            let width = Math.floor(q_select),
+                height = Math.floor((img.naturalHeight * q_select)/img.naturalWidth);
+            canvas.width = width;
+            canvas.height = height;
+            ctx.drawImage(img, 0, 0, width, height);
+            document.getElementById("base64value").value = canvas.toDataURL("image/png");
+        }
+        // console.log(URL.createObjectURL(file))
+        img.src = URL.createObjectURL(file);
 
     const fileInput = document.getElementById('fileId');
 

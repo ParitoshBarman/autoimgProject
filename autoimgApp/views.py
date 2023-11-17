@@ -61,11 +61,7 @@ def getBase64Image(img):
 def index(request):
     if request.method == 'POST':
         try:
-            file = request.FILES['picture']
-            WorkingData = WorkingDB(selectFile=file)
-            WorkingData.save()
-            main_URL = WorkingData.selectFile.url
-            img = cv2.imread(f"./media{main_URL}")
+            img = data_uri_to_cv2_img(f"{request.POST.get('pictureBase')}")
             h, w, c = img.shape
             needSize = int(request.POST.get('q-select'))
 
@@ -110,7 +106,6 @@ def index(request):
             if(request.POST.get('removequality')=="normal" or request.POST.get('removequality')=="advence"):
                 # print("Working..................")
                 cropedImg = seg.removeBG(cropedImg, (blueC,greenC,redC), cutThreshold=0.6)
-                cv2.imwrite(f"./media{main_URL.replace('.', 'cropped')}.jpg", cropedImg)
             elif(request.POST.get('removequality')=="advence"):
                 # print("Working..................")
                 fileLocationCode = int(rdnnnn.choice(randdomList))
@@ -118,20 +113,16 @@ def index(request):
                 cv2.imwrite(f"xxxxxxxx{fileLocationCode}.png", op)
                 cropedImg = cv2.imread(f"xxxxxxxx{fileLocationCode}.png")
                 cropedImg = seg.removeBG(cropedImg, (blueC,greenC,redC), cutThreshold=0.6)
-                cv2.imwrite(f"./media{main_URL.replace('.', 'cropped')}.png", cropedImg)
-            else:
-                cv2.imwrite(f"./media{main_URL.replace('.', 'cropped')}.jpg", cropedImg)
 
 
-            cv2.imwrite(f"./media{main_URL.replace('.', 'facedetection')}.jpg", imgCopy)
             sendData = {
-                "img": main_URL,
-                "facedetected": f"{main_URL.replace('.', 'facedetection')}.jpg",
-                "cropeImage": f"{main_URL.replace('.', 'cropped')}.jpg",
+                "img": getBase64Image(img),
+                "facedetected": getBase64Image(imgCopy),
+                "cropeImage": getBase64Image(cropedImg),
                 "needSize": needSize
             }
-            t1 = threading.Thread(target=deletExtraImages)
-            t1.start()
+            # t1 = threading.Thread(target=deletExtraImages)
+            # t1.start()
 
             return render(request, 'index.html', sendData)
         except:
