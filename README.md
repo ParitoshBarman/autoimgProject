@@ -14,9 +14,11 @@ The Auto Image Project is an automated tool that processes images with intellige
 - Intelligent detection and tagging
 - Fast and efficient operations
 - Clean and modular code
+- Direct Print By Printer
 
 ## 🛠️ Technologies Used
 - Python
+- Django
 - OpenCV
 
 
