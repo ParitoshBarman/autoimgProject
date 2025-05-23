@@ -53,12 +53,61 @@ The Auto Image Project is an automated tool that processes images with intellige
 - Python
 - Django
 - OpenCV
+- JavaScript
 
 
 ## 📽️ Demo Video
 You can watch a short video demonstration of the project on [LinkedIn](https://www.linkedin.com/posts/paritosh-barman-003257229_7daylinkedinchallenge-prepleafbymasai-prepleaf-activity-7125579375038578690-6cu7?utm_source=share&utm_medium=member_desktop)
 
 
+## 📁 Project Folder Structure
+```
+|____autoimgApp
+| |____admin.py
+| |____apps.py
+| |____models.py
+| |____password.py
+| |____sitemaps.py
+| |____tests.py
+| |____urls.py
+| |____views.py
+|____autoimgProject
+| |____asgi.py
+| |____settings.py
+| |____sitemaps.py
+| |____urls.py
+| |____wsgi.py
+|____db.sqlite3
+|____haarcascade_frontalface_default.xml
+|____IMG_20211226_180357.jpg
+|____IMG_20231031_214329.jpg
+|____Links.txt
+|____manage.py
+|____media
+| |____FileDBFolder
+| | |____IMG20230508104022_r2277wy.jpg
+| | |____IMG20230508104022_r2277wycroppedjpg.jpg
+| | |____IMG20230508104022_r2277wyfacedetectionjpg.jpg
+|____README.md
+|____requirements.txt
+|____static
+| |____forcontactpage.css
+| |____img
+| |____JS.js
+| |____print.css
+| |____responsive.css
+| |____responsive2.css
+| |____style.css
+|____templates
+| |____about.html
+| |____base.html
+| |____contact.html
+| |____index.html
+| |____privacy_policy.html
+|____venv
+|____vercel.json
+
+```
 
 ## 🖼️ Screenshots
 
