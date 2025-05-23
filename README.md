@@ -85,9 +85,6 @@ Here are some key screenshots demonstrating the features and workflow of the **A
 ### 7. Indicate Features
 ![Indicate Features](screenshots/indicateTheFeatures.png)
 
-### 7. Features Choose Options
-![Indicate Features](screenshots/FeaturesChooseOptions.png)
-
 ### 8. Image Copy Required
 ![Image Copy](screenshots/imageCopyRequired.png)
 
