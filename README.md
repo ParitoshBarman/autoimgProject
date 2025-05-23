@@ -65,10 +65,10 @@ You can watch a short video demonstration of the project on [LinkedIn](https://w
 Here are some key screenshots demonstrating the features and workflow of the **Auto Image Project**:
 
 ### 1. Automatically Detect the Face
-![Automatically Detect the Face](screenshots/automaticlayDetectTheFace.png)
+![Automatically Detect the Face](screenshots/automaticalyDetectTheFace.png)
 
 ### 2. Automatically Crop the Image Based on Face Position
-![Automatically Crop the Image](screenshots/AutomaticlayCropTheImageBasedOnFaceposition.png)
+![Automatically Crop the Image](screenshots/AutometicalyCroptheImageBasedOnFaceposition.png)
 
 ### 3. Direct Print Option
 ![Direct Print Option](screenshots/directPrintOption.png)
